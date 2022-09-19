@@ -86,6 +86,8 @@ ol li{
     margin: 0 15px 0 35px;
     color: aliceblue;
     box-shadow: 5px 5px 15px -5px rgba( 0, 0, 0, 0.3);
+    transform: rotate(45deg);
+    text-decoration: none;
 }
 .todo_style .fa-times:hover{
     background-color: crimson;

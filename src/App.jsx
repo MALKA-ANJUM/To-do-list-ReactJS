@@ -15,6 +15,14 @@ const App = () => {
     });
     setInputList("");
   };
+  const deleteItems = (id) => {
+    //console.log("deleted");
+    setItems((oldItems) => {
+      return oldItems.filter((arrElements, i) => {
+        return i !== id;
+      });
+    });
+  };
   return (
     <>
       <div className="main_div">
@@ -32,8 +40,15 @@ const App = () => {
 
           <ol>
             {/* <li>{inputList}</li> */}
-            {items.map((item) => {
-              return <TodoLists text={item}></TodoLists>
+            {items.map((item, i) => {
+              return (
+                <TodoLists
+                  text={item}
+                  key={i}
+                  id={i}
+                  onSelect={deleteItems}
+                ></TodoLists>
+              );
             })}
           </ol>
         </div>
