@@ -1,53 +1,55 @@
 import React, { useState } from "react";
 import "./App.css";
-import TodoLists from "./TodoLists";
+import TodoList from "./TodoList";
 
 const App = () => {
-  const [inputList, setInputList] = useState("");
+  const [list, setList] = useState("");
   const [items, setItems] = useState([]);
 
-  const itemEvent = (event) => {
-    setInputList(event.target.value);
+  const handleChange = (e) => {
+    // console.log("changed")
+    console.log(e.target.value);
+    setList(e.target.value);
   };
-  const handleLists = () => {
-    setItems((oldItems) => {
-      return [...oldItems, inputList];
+  const handleClick = () => {
+    //console.log("clicked")
+    setItems((old) => {
+      return [...old, list];
     });
-    setInputList("");
+    setList("");
   };
   const deleteItems = (id) => {
     //console.log("deleted");
-    setItems((oldItems) => {
-      return oldItems.filter((arrElements, i) => {
+    setItems((old) => {
+      return old.filter((arrElem, i) => {
         return i !== id;
       });
     });
   };
+
   return (
     <>
       <div className="main_div">
         <div className="center_div">
           <br />
-          <h1>ToDo List</h1>
-          <br />
+          <h1>To-do List</h1>
           <input
             type="text"
+            onChange={handleChange}
+            value={list}
             placeholder="Add an Item"
-            value={inputList}
-            onChange={itemEvent}
           />
-          <button onClick={handleLists}> + </button>
-
+          <button onClick={handleClick}>+</button>
           <ol>
-            {/* <li>{inputList}</li> */}
-            {items.map((item, i) => {
+            {/* <li className="todo_style">{list}</li> */}
+            {items.map((itemVal, i) => {
               return (
-                <TodoLists
-                  text={item}
-                  key={i}
+                <TodoList
+                  text={itemVal}
                   id={i}
+                  key={i}
                   onSelect={deleteItems}
-                ></TodoLists>
+                ></TodoList>
               );
             })}
           </ol>
